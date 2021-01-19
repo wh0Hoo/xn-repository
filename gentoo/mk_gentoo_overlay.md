@@ -3,6 +3,7 @@
 * 참고
   * [sunny-overlay](https://github.com/dguglielmi/sunny-overlay)
   * [Custom ebuild repository](https://wiki.gentoo.org/wiki/Custom_ebuild_repository)
+  * [Basic guide to write Gentoo Ebuilds](https://wiki.gentoo.org/wiki/Basic_guide_to_write_Gentoo_Ebuilds)
 
 ```sh
 # emerge --ask dev-vcs/git

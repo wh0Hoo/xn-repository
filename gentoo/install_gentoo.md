@@ -198,7 +198,7 @@ LANG="ko_KR.utf8"
 
 ### Portage 설정
 
-mk_gentoo_repos.md 파일을 따라한다.
+[mk_gentoo_overlay.md](https://github.com/wh0Hoo/xn-repository/blob/master/gentoo/mk_gentoo_overlay.md) 파일을 따라한다.
 
 ### XN kernel 설치
 
