@@ -118,7 +118,7 @@ lrwxrwxrwx root/root       0 2021-01-14 15:56 modules/5.4.80-gentoo-r1/source ->
 ### Add Ebuild File for Package
 
 이 작업은 아래 파일이 실제로 존재해야만 한다
- * https://github.com/XNSYSTEMS/xn-repository/raw/master/kernel/xnimage-5.4.80.tar.xz
+ * https://<span></span>github.com/XNSYSTEMS/xn-repository/raw/master/kernel/xnimage-5.4.80.tar.xz
 
 Manifest 파일을 생성할때 SRC_URI 에 있는 실제 파일에 대한 정보가 갱신되기 때문이다
 
