@@ -46,8 +46,8 @@ kernel 폴더에 xnimage-5.4.80.tar.xz 파일을 올린다
    * modules
      * 5.4.80
 
-아래 테스트 용도의 파일에는 boot 폴더의 System.map 이라던가 config 는 그저 참고용이다
-modules 폴더의 커널 모듈 폴더 이름은 커널 컴파일시에 지정해서 알맞는 이름으로 바꿔라
+아래 테스트 용도의 파일에는 boot 폴더의 System.map 이라던가 config 는 그저 참고용이다   
+modules 폴더의 커널 모듈 폴더 이름은 커널 컴파일시에 지정해서 알맞는 이름으로 바꿔라   
 또한 모듈 폴더의 링크 파일(build, source)이 있는데 다 제거해도 된다
 
 
