@@ -2,6 +2,7 @@
 ## Install Gentoo linux
 
 [Quick Installation Checklist](https://wiki.gentoo.org/wiki/Quick_Installation_Checklist)
+[Gentoo Linux amd64 Handbook: Installing Gentoo](https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation)
 
 ## Partitioning
 
