@@ -1,11 +1,13 @@
-version: "3"
+version: "3.9"
 services:
     es:
         image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
         # container_name 설정은 stack 으로 배포시에는 무시된다
         container_name: es{{.Task.Slot}}
         environment:
-            - node.name={{.Node.Hostname}}
+            # {{.Node.Hostname}} 대신 {{.Task.Slot}} 를 사용하는 것은
+            # compose 파일이 아닌 다른 영향을 줄이기 위함이다
+            - node.name=es{{.Task.Slot}}
             - cluster.name=es-docker-cluster
             # incoming requests 를 위한 bind 로 여러 인터페이스에 bind 할 수 있다
             - network.bind_host=0.0.0.0
@@ -20,9 +22,9 @@ services:
             - discovery.seed_hosts=tasks.es
             # Master 로 사용할 Task 들에 설정된 node.name 값을 넣어야한다
             # 여기서는 모든 Node 를 Master 로 사용할 것이므로 모두 넣는다
-            # global mode 가 아니면 node.name 을 es{{.Task.Slot}} 과 같이 고정된 값을 사용할 수 있다
-            # 여기서는 global mode 를 사용하므로 그나마 고정할 수 있는 Hostname 으로 사용한다
-            - cluster.initial_master_nodes=Node1,Node3,Node5
+            # 위 node.name 으로 설정한 es{{.Task.Slot}} 를 예측할 수 있다
+            # replicas: 3 설정으로 es1 ~ es3 까지 생성됨을 알수있다
+            - cluster.initial_master_nodes=es1,es2,es3
             - bootstrap.memory_lock=true
             - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
         ulimits:
@@ -37,16 +39,18 @@ services:
             # API 를 위한 포트로 ingress 를 통해 모든 Node 가 listen 하기 위함
             - 9200:9200
         deploy:
-            mode: global # Will be deployed to all nodes that match constraint, once per node
+            mode: replicated
+            replicas: 3
             placement:
                 # elasticsearch Node 로 사용할 Node 에는 아래 label 을 설정해라
                 constraints: [node.labels.es == 1]
+                # Node 당 실행되는 task 수를 제한한다
+                max_replicas_per_node: 1
         networks:
             - elastic
 volumes:
     data:
-        external:
-            name: 'esdata.{{.Task.Slot}}'
+        name: 'esdata.{{.Task.Slot}}'
 
 networks:
     elastic:
