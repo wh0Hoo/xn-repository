@@ -50,7 +50,7 @@ services:
             - elastic
 volumes:
     data:
-        name: 'esdata.{{.Task.Slot}}'
+        driver: local
 
 networks:
     elastic:
