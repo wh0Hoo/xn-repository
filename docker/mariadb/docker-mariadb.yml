@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+    mariadb:
+        image: mariadb:latest
+        ports:
+            - "3306:3306"
+        environment:
+            - "MYSQL_ROOT_PASSWORD=mariadb"
+            - "MYSQL_USER=mariadb"
+            - "MYSQL_PASSWORD=mariadb"
+            - "MYSQL_DATABASE=data"
+            - "MYSQL_MAX_CONNECTIONS=256"
+            - "MYSQL_MAX_STATEMENT_TIME=60"
+            - "MYSQL_MAX_ALLOWED_PACKET=16M"
+            - "MYSQL_QUERY_CACHE_LIMIT=128K"
+            - "MYSQL_QUERY_CACHE_SIZE=128M"
+            - "MYSQL_INNODB_BUFFER_POOL_SIZE=1G"
+            - "MYSQL_INNODB_LOCK_WAIT_TIMEOUT=60"
+            - "MYSQL_INITDB_SKIP_TZINFO=TRUE"
+            - "WSREP_FC_FACTOR=0.9"
+            - "WSREP_FC_LIMIT=32"
+            - "WSREP_SYNC_WAIT=7"
+            - "SERVICE_NAME=mariadb"
+            - "CLUSTER_NODES=3"
+        volumes:
+            - mysql:/var/lib/mysql
+            - /etc/localtime:/etc/localtime:ro
+            - ./galera.cnf:/etc/mysql/conf.d/galera.cnf.template:ro
+        deploy:
+            mode: replicated
+            replicas: 1
+
+volumes:
+    mysql:
+        driver: local
+
